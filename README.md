@@ -22,7 +22,7 @@ This is a lab assignment from my Java class. The original requirements are as fo
 5)	可自行设计合理扩展功能等。
 ```
 
-SQL to create an example database:
+Before running the program, you need to create a MySQL database named `bank_console` and a table named `people` with the following schema:
 
 ```sql
 CREATE DATABASE IF NOT EXISTS bank_console;
@@ -35,4 +35,12 @@ CREATE TABLE people (
     balance INT NOT NULL
 );
 INSERT INTO people (username, password, role, balance) VALUES ('admin', 'admin', 'administrator', 0), ('888888', '123456', 'customer', 50000);
+```
+
+It's also required to create a `db.properties` file in `app/src/main/resources` with the following content:
+
+```properties
+db.url=jdbc:mysql://localhost:3306/bank_console
+db.user=your_database_user
+db.password=your_database_password
 ```
