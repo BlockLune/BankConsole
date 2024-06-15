@@ -41,5 +41,5 @@ java {
 
 application {
     // Define the main class for the application.
-    mainClass = "top.fishg.BankConsole"
+    mainClass = "top.fishg.bankconsole.App"
 }

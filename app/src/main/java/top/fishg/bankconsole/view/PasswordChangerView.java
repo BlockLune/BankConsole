@@ -5,7 +5,10 @@ import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.JPasswordField;
 import javax.swing.JButton;
-import java.awt.GridLayout;
+import java.awt.GridBagLayout;
+import java.awt.GridBagConstraints;
+import java.awt.Insets;
+import java.awt.BorderLayout;
 
 public class PasswordChangerView extends JFrame {
   private JPasswordField oldPasswordField = new JPasswordField(20);
@@ -19,13 +22,14 @@ public class PasswordChangerView extends JFrame {
     JLabel newPasswordLabel = new JLabel("新密码：");
     JLabel newPasswordForConfirmLabel = new JLabel("确认新密码：");
 
-    JPanel passwordGroupPanel = new JPanel(new GridLayout(3, 2));
-    passwordGroupPanel.add(oldPasswordLabel);
-    passwordGroupPanel.add(oldPasswordField);
-    passwordGroupPanel.add(newPasswordLabel);
-    passwordGroupPanel.add(newPasswordField);
-    passwordGroupPanel.add(newPasswordForConfirmLabel);
-    passwordGroupPanel.add(newPasswordForConfirmField);
+    JPanel passwordGroupPanel = new JPanel(new GridBagLayout());
+    GridBagConstraints gbc = new GridBagConstraints();
+    gbc.insets = new Insets(5, 5, 5, 5);
+    gbc.anchor = GridBagConstraints.WEST;
+
+    addFormItem(passwordGroupPanel, gbc, oldPasswordLabel, oldPasswordField, 0);
+    addFormItem(passwordGroupPanel, gbc, newPasswordLabel, newPasswordField, 1);
+    addFormItem(passwordGroupPanel, gbc, newPasswordForConfirmLabel, newPasswordForConfirmField, 2);
 
     JPanel buttonGroupPanel = new JPanel();
     buttonGroupPanel.add(this.cancelButton);
@@ -33,13 +37,23 @@ public class PasswordChangerView extends JFrame {
 
     setTitle("改密 | ATM");
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    setLayout(new GridLayout(2, 1));
-    add(passwordGroupPanel);
-    add(buttonGroupPanel);
+    setLayout(new BorderLayout());
+    add(passwordGroupPanel, BorderLayout.CENTER);
+    add(buttonGroupPanel, BorderLayout.SOUTH);
     setSize(400, 300);
     setLocationRelativeTo(null);
     setResizable(false);
     pack();
+  }
+
+  private void addFormItem(JPanel panel, GridBagConstraints gbc, JLabel label, JPasswordField textField, int row) {
+    gbc.gridx = 0;
+    gbc.gridy = row;
+    panel.add(label, gbc);
+
+    gbc.gridx = 1;
+    gbc.gridy = row;
+    panel.add(textField, gbc);
   }
 
   public JPasswordField getOldPasswordField() {
