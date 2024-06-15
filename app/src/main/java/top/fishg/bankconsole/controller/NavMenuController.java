@@ -15,6 +15,10 @@ public class NavMenuController {
     this.navMenuView = navMenuView;
     this.account = account;
 
+    this.navMenuView.getManageButton().addActionListener(e -> {
+      JOptionPane.showMessageDialog(this.navMenuView, "此功能尚未实现", "错误", JOptionPane.ERROR_MESSAGE);
+    });
+
     this.navMenuView.getQueryButton().addActionListener(e -> {
       String message = "账号：" + this.account.getUsername() + "\n" + "账户余额：" + this.account.getBalance();
       JOptionPane.showMessageDialog(this.navMenuView, message, "查询结果 | ATM", JOptionPane.INFORMATION_MESSAGE);

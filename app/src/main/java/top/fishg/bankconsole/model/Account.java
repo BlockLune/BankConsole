@@ -1,12 +1,12 @@
 package top.fishg.bankconsole.model;
 
-enum UserRole {
-  ADMINISTRATOR,
-  EMPLOYEE,
-  CUSTOMER
-}
-
 public class Account {
+  public enum UserRole {
+    ADMINISTRATOR,
+    EMPLOYEE,
+    CUSTOMER
+  }
+
   private String username;
   private String password;
   private UserRole role;

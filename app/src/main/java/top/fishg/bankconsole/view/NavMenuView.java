@@ -7,18 +7,23 @@ import javax.swing.JPanel;
 import java.awt.GridLayout;
 
 public class NavMenuView extends JFrame {
+  private JButton manageButton = new JButton("管理");
   private JButton queryButton = new JButton("查询");
   private JButton depositButton = new JButton("存钱");
   private JButton withdrawButton = new JButton("取钱");
   private JButton changePasswordButton = new JButton("改密");
   private JButton logoutButton = new JButton("登出");
 
-  public NavMenuView() {
+  public NavMenuView(boolean isAdmin) {
     JPanel titlePanel = new JPanel();
     JLabel title = new JLabel("业务选择");
     titlePanel.add(title);
 
     JPanel buttonGroupPanel = new JPanel(new GridLayout(5, 1));
+    if (isAdmin) {
+      buttonGroupPanel.setLayout(new GridLayout(6, 1));
+      buttonGroupPanel.add(this.manageButton);
+    }
     buttonGroupPanel.add(this.queryButton);
     buttonGroupPanel.add(this.depositButton);
     buttonGroupPanel.add(this.withdrawButton);
@@ -35,6 +40,10 @@ public class NavMenuView extends JFrame {
     setSize(400, 300);
     setLocationRelativeTo(null);
     setResizable(false);
+  }
+
+  public JButton getManageButton() {
+    return this.manageButton;
   }
 
   public JButton getQueryButton() {

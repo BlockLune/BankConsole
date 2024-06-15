@@ -29,8 +29,9 @@ public class LoginController {
         this.loginView.getUsernameField().requestFocus();
       } else {
         JOptionPane.showMessageDialog(this.loginView, "登录成功！");
-        NavMenuView navMenuView = new NavMenuView();
         Account account = accounts.getIfExists(username);
+        NavMenuView navMenuView = new NavMenuView(
+            account.getRole().toString().equals(Account.UserRole.ADMINISTRATOR.toString()));
         new NavMenuController(navMenuView, account, this.loginView);
         navMenuView.setVisible(true);
         this.loginView.dispose();
