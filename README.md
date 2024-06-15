@@ -21,3 +21,18 @@ This is a lab assignment from my Java class. The original requirements are as fo
 4)	增加数据存储功能；
 5)	可自行设计合理扩展功能等。
 ```
+
+SQL to create an example database:
+
+```sql
+CREATE DATABASE IF NOT EXISTS bank_console;
+USE bank_console;
+CREATE TABLE people (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    username VARCHAR(255) NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    role VARCHAR(255) NOT NULL,
+    balance INT NOT NULL
+);
+INSERT INTO people (username, password, role, balance) VALUES ('admin', 'admin', 'administrator', 0), ('888888', '123456', 'customer', 50000);
+```
