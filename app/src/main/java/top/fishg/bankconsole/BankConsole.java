@@ -1,8 +1,8 @@
-package top.fishg;
+package top.fishg.bankconsole;
 
-import top.fishg.controller.LoginController;
-import top.fishg.model.Accounts;
-import top.fishg.view.LoginView;
+import top.fishg.bankconsole.controller.LoginController;
+import top.fishg.bankconsole.model.Accounts;
+import top.fishg.bankconsole.view.LoginView;
 
 public class BankConsole {
   public static void main(String[] args) {

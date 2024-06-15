@@ -1,11 +1,11 @@
-package top.fishg.controller;
+package top.fishg.bankconsole.controller;
 
 import javax.swing.JOptionPane;
 
-import top.fishg.model.Account;
-import top.fishg.view.LoginView;
-import top.fishg.view.NavMenuView;
-import top.fishg.view.PasswordChangerView;
+import top.fishg.bankconsole.model.Account;
+import top.fishg.bankconsole.view.LoginView;
+import top.fishg.bankconsole.view.NavMenuView;
+import top.fishg.bankconsole.view.PasswordChangerView;
 
 public class NavMenuController {
   private NavMenuView navMenuView;

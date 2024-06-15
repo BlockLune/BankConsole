@@ -1,7 +1,7 @@
-package top.fishg.controller;
+package top.fishg.bankconsole.controller;
 
-import top.fishg.model.Account;
-import top.fishg.view.PasswordChangerView;
+import top.fishg.bankconsole.model.Account;
+import top.fishg.bankconsole.view.PasswordChangerView;
 
 import javax.swing.JOptionPane;
 

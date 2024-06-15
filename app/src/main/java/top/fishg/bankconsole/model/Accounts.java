@@ -1,4 +1,4 @@
-package top.fishg.model;
+package top.fishg.bankconsole.model;
 
 import java.util.ArrayList;
 

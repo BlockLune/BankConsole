@@ -1,4 +1,4 @@
-package top.fishg.view;
+package top.fishg.bankconsole.view;
 
 import javax.swing.JFrame;
 import javax.swing.JButton;
