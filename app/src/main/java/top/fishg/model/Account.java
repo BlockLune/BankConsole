@@ -1,18 +1,29 @@
 package top.fishg.model;
 
+enum UserRole {
+  ADMINISTRATOR,
+  EMPLOYEE,
+  CUSTOMER
+}
+
 public class Account {
   private String username;
   private String password;
-  private int storedMoney;
+  private UserRole role;
+  private int balance;
+  private final DatabaseHandler dbHandler;
 
-  public Account(String username, String password, double money) {
+  public Account(String username, String password, String role, int balance) throws Exception {
+    dbHandler = new DatabaseHandler();
+
     if (username == null)
       throw new NullPointerException();
     if (password == null)
       throw new NullPointerException();
     this.username = username;
     this.password = password;
-    this.storedMoney = (int) (money * 100); // 100.00 is stored as 10000
+    this.role = UserRole.valueOf(role.toUpperCase());
+    this.balance = balance;
   }
 
   public String getUsername() {
@@ -23,31 +34,56 @@ public class Account {
     return this.password;
   }
 
-  public double getMoney() {
-    return (double) (this.storedMoney / 100);
+  public String getRole() {
+    return this.role.toString();
   }
 
-  public void withdraw(double money) throws Exception {
-    if (money > this.storedMoney) {
+  public int getBalance() {
+    return this.balance;
+  }
+
+  public void updateThis() throws Exception {
+    String sql = "SELECT * FROM people WHERE username = '" + this.username + "'";
+    dbHandler.query(sql, rs -> {
+      if (rs.getFetchSize() != 1) {
+        throw new Exception("非法条目");
+      }
+      while (rs.next()) {
+        this.password = rs.getString("password");
+        this.role = UserRole.valueOf(rs.getString("role").toUpperCase());
+        this.balance = rs.getInt("balance");
+      }
+    });
+  }
+
+  public void updateDatabase() throws Exception {
+    String sql = "UPDATE people SET password = ?, balance = ? WHERE username = ?";
+    dbHandler.update(sql, this.password, this.balance, this.username);
+  }
+
+  public void withdraw(int money) throws Exception {
+    if (money > this.balance) {
       throw new Exception("余额不足");
     }
     if (money < 0) {
       throw new Exception("不能取出负数");
     }
-    if ((int) money % 100 != 0) {
+    if (money % 100 != 0) {
       throw new Exception("取款金额必须是 100 的整数倍");
     }
-    if (money > 5000 * 100) {
+    if (money > 5000) {
       throw new Exception("单次取款不能超过 5000 元");
     }
-    this.storedMoney -= (int) (money * 100);
+    this.balance -= money;
+    updateDatabase();
   }
 
-  public void deposit(double money) throws Exception {
+  public void deposit(int money) throws Exception {
     if (money < 0) {
       throw new Exception("不能存入负数");
     }
-    this.storedMoney += (int) (money * 100);
+    this.balance += money;
+    updateDatabase();
   }
 
   public void changePassword(String newPassword) throws Exception {
@@ -59,5 +95,6 @@ public class Account {
       }
     }
     password = newPassword;
+    updateDatabase();
   }
 }

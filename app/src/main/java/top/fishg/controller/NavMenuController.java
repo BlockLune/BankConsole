@@ -16,7 +16,7 @@ public class NavMenuController {
     this.account = account;
 
     this.navMenuView.getQueryButton().addActionListener(e -> {
-      String message = "账号：" + this.account.getUsername() + "\n" + "账户余额：" + this.account.getMoney();
+      String message = "账号：" + this.account.getUsername() + "\n" + "账户余额：" + this.account.getBalance();
       JOptionPane.showMessageDialog(this.navMenuView, message, "查询结果 | ATM", JOptionPane.INFORMATION_MESSAGE);
     });
 
@@ -25,9 +25,9 @@ public class NavMenuController {
           JOptionPane.QUESTION_MESSAGE);
       if (input != null) {
         try {
-          double money = Double.parseDouble(input);
+          int money = Integer.parseInt(input);
           this.account.deposit(money);
-          JOptionPane.showMessageDialog(this.navMenuView, "存款成功！余额：" + this.account.getMoney(), "成功",
+          JOptionPane.showMessageDialog(this.navMenuView, "存款成功！余额：" + this.account.getBalance(), "成功",
               JOptionPane.INFORMATION_MESSAGE);
         } catch (NumberFormatException ex) {
           JOptionPane.showMessageDialog(this.navMenuView, "请输入正确的金额！存款已取消。", "错误", JOptionPane.ERROR_MESSAGE);
@@ -42,9 +42,9 @@ public class NavMenuController {
           JOptionPane.QUESTION_MESSAGE);
       if (input != null) {
         try {
-          double money = Double.parseDouble(input);
+          int money = Integer.parseInt(input);
           this.account.withdraw(money);
-          JOptionPane.showMessageDialog(this.navMenuView, "取款成功！余额：" + this.account.getMoney(), "成功",
+          JOptionPane.showMessageDialog(this.navMenuView, "取款成功！余额：" + this.account.getBalance(), "成功",
               JOptionPane.INFORMATION_MESSAGE);
         } catch (NumberFormatException ex) {
           JOptionPane.showMessageDialog(this.navMenuView, "请输入正确的金额！取款已取消。", "错误", JOptionPane.ERROR_MESSAGE);

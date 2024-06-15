@@ -7,7 +7,8 @@ import top.fishg.view.LoginView;
 public class BankConsole {
   public static void main(String[] args) {
     LoginView loginView = new LoginView();
-    new LoginController(loginView, new Accounts());
+    Accounts accounts = new Accounts();
+    new LoginController(loginView, accounts);
 
     loginView.setVisible(true);
   }
